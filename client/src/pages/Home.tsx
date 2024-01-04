@@ -15,19 +15,19 @@ import { useMutation } from "react-query";
 const Home: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState<string>("");
 
-  // const { mutate, isLoading } = useMutation({
-  //   mutationFn: getSummary,
-  //   onSuccess: (data) => {
-  //     console.log(data);
-  //   },
-  // });
+  const { mutate, isLoading } = useMutation({
+    mutationFn: getSummary,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
 
   const handleUrl = (e: CustomEvent) => {
     setVideoUrl(e.detail.value!);
   };
 
   const summary = () => {
-    // mutate(videoUrl);
+    mutate(videoUrl);
   };
   return (
     <IonPage>
