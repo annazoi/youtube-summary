@@ -9,7 +9,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { getSummary } from "../services/summary";
+import { getSummary } from "../../services/summary";
 import { useMutation } from "react-query";
 
 const Home: React.FC = () => {
