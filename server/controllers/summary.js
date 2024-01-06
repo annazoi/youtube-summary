@@ -6,7 +6,10 @@ const summary = require("../services/summary");
 
 const getSummary = async (req, res) => {
   const { url } = req.body;
+  console.log(url, "url");
+
   const id = new URL(url).searchParams.get("v");
+  console.log(id, "id");
 
   const YD = new YoutubeMp3Downloader({
     ffmpegPath: ffmpeg,

@@ -3,7 +3,7 @@ import { API_URL } from "../constants";
 
 export const getSummary = async (url: string) => {
   try {
-    const response = await Axios.get(`${API_URL}/summary?url=${url}`);
+    const response = await Axios.post(`${API_URL}/summary`, { url });
     return response.data;
   } catch (error) {
     return error;
