@@ -1,25 +1,42 @@
 import Google from "./Google";
-import { IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import {
+  IonButton,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
 import React from "react";
-import { signInWithGoogle } from "../../services/auth";
+import { signInWithGoogle, logoutUser } from "../../services/auth";
 import { addNewUser } from "../../services/user";
 import "./style.css";
 
 interface AuthLogin {
-  userLogin: () => void;
+  userLogin: any;
 }
 
 const Auth: React.FC<AuthLogin> = ({ userLogin }) => {
   const handleLogin = async (user: any) => {
     try {
-      const loggedUser = await addNewUser(user);
-      if (loggedUser) {
-        userLogin();
+      const userExist = await addNewUser(user);
+      if (userExist) {
+        userLogin(userExist);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const handleLogin = async (user: any) => {
+  //   try {
+  //     const loggedUser = await addNewUser(user);
+  //     if (loggedUser) {
+  //       userLogin();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const googleSign = async () => {
     try {
@@ -30,6 +47,16 @@ const Auth: React.FC<AuthLogin> = ({ userLogin }) => {
       console.log(error);
     }
   };
+
+  const logout = async () => {
+    try {
+      logoutUser();
+      console.log("logout");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -40,6 +67,7 @@ const Auth: React.FC<AuthLogin> = ({ userLogin }) => {
       <div className="signIn-content">
         <Google onClick={googleSign} />
       </div>
+      <IonButton onClick={logout}>Logout</IonButton>
     </IonPage>
   );
 };
