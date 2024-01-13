@@ -5,13 +5,21 @@ import { User } from "../types/interfaces";
 export const addNewUser = async (user: any): Promise<User | null> => {
   try {
     let userToStore: User = {
-      id: user.id,
+      uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
     };
+
     if (isNewUser(user.metadata.creationTime)) {
-      await setDoc(doc(db, "users", user.id), userToStore);
+      const newUser = await setDoc(doc(db, "users", user.uid), userToStore);
+      console.log("Document written with ID: ", newUser);
+    } else {
+      // const docRef = doc(db, "users", user.uid);
+      // const docSnap = await getDoc(docRef);
+      // if (docSnap.exists()) {
+      //   return docSnap.data() as User;
+      // }
     }
     const finalUser = {
       ...userToStore,

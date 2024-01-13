@@ -6,20 +6,29 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { addNewUser } from "./user";
+import { User } from "../types/interfaces";
+import { authStore } from "../store/auth";
 
 const auth = getAuth(app);
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    addNewUser(user);
-    return;
-  }
-});
+// onAuthStateChanged(auth, async (user) => {
+//   console.log("onAuthStateChanged", user);
+//   if (user) {
+//     await addNewUser(user);
+//   } else {
+//     console.log("no user");
+//   }
+// });
 
 const googleProvider = new GoogleAuthProvider();
 
 export const signInWithGoogle = (): Promise<any> => {
-  return signInWithPopup(auth, googleProvider);
+  try {
+    return signInWithPopup(auth, googleProvider);
+  } catch (e: any) {
+    console.error("Error signing in with Google: ", e);
+    return Promise.reject(e);
+  }
 };
 
 export const getLoggedUser = () => {

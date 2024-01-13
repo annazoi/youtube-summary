@@ -8,14 +8,27 @@ import {
   IonTitle,
   IonToolbar,
   IonLoading,
+  IonFabButton,
+  IonFab,
+  IonFabList,
+  IonIcon,
+  useIonRouter,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getSummary } from "../../services/summary";
-import { useMutation } from "react-query";
+import { addNewUser } from "../../services/user";
+import { useMutation, useQuery } from "react-query";
+import { logOutOutline } from "ionicons/icons";
+import { logoutUser } from "../../services/auth";
+import { authStore } from "../../store/auth";
 
 const Home: React.FC = () => {
+  const { photoURL } = authStore();
+
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [summaryText, setSummaryText] = useState<string>("");
+
+  const router = useIonRouter();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: getSummary,
@@ -32,6 +45,18 @@ const Home: React.FC = () => {
   const summary = () => {
     mutate(videoUrl);
   };
+
+  const logout = async () => {
+    try {
+      logoutUser();
+      router.push("/auth", "forward", "replace");
+      // window.location.reload();
+      console.log("logout");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -41,6 +66,9 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding">
         <IonItem>
+          <img src={photoURL} alt="user" />
+        </IonItem>
+        <IonItem className="ion-padding ion-margin">
           <IonInput
             placeholder="Enter a URL from youtube"
             value={videoUrl}
@@ -57,6 +85,16 @@ const Home: React.FC = () => {
             <p>{summaryText}</p>
           </IonItem>
         )}
+        <IonFab slot="fixed" horizontal="end" vertical="top" edge={true}>
+          <IonFabButton>
+            <IonIcon></IonIcon>
+          </IonFabButton>
+          <IonFabList side="start">
+            <IonFabButton onClick={logout}>
+              <IonIcon icon={logOutOutline}></IonIcon>
+            </IonFabButton>
+          </IonFabList>
+        </IonFab>
       </IonContent>
     </IonPage>
   );

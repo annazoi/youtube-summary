@@ -33,10 +33,10 @@ const App: React.FC = () => (
           <Home />
         </Route>
         <Route exact path="/auth">
-          <Auth></Auth>
+          <Auth />
         </Route>
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Redirect to="/auth" />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

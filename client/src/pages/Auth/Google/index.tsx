@@ -1,16 +1,15 @@
 import { FC } from "react";
+import { IonIcon, IonLabel, IonButton } from "@ionic/react";
+import React from "react";
+import { logoGoogle } from "ionicons/icons";
 
 interface GoogleLogin {
   onClick: () => void;
 }
 
-import { IonIcon, IonLabel, IonButton } from "@ionic/react";
-import React from "react";
-import { logoGoogle } from "ionicons/icons";
-
 const Google: React.FC<GoogleLogin> = ({ onClick }) => {
   return (
-    <IonButton size="large" onClick={onClick}>
+    <IonButton size="large" onClick={onClick} expand="block">
       <IonIcon slot="start" icon={logoGoogle} size="large"></IonIcon>
       <IonLabel slot="end">Sign in with Google</IonLabel>
     </IonButton>
