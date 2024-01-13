@@ -15,7 +15,6 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { signInWithGoogle } from "../../services/auth";
-// import { addNewUser } from "../../services/user";
 import "./style.css";
 import { authStore } from "../../store/auth";
 import { addNewUser } from "../../services/user";
@@ -26,7 +25,9 @@ interface AuthLogin {
 
 const Auth: React.FC = () => {
   const router = useIonRouter();
+
   const { logIn } = authStore((state) => state);
+
   const googleSign = async () => {
     try {
       signInWithGoogle().then(async (res) => {
@@ -45,6 +46,7 @@ const Auth: React.FC = () => {
       if (userInfo) {
         logIn(userInfo);
         router.push("/home", "forward", "replace");
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);

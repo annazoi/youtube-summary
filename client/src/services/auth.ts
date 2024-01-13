@@ -5,9 +5,6 @@ import {
   signInWithPopup,
   onAuthStateChanged,
 } from "firebase/auth";
-import { addNewUser } from "./user";
-import { User } from "../types/interfaces";
-import { authStore } from "../store/auth";
 
 const auth = getAuth(app);
 

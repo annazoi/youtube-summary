@@ -15,15 +15,16 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import { getSummary } from "../../services/summary";
+import { getSummary, addSummary } from "../../services/summary";
 import { addNewUser } from "../../services/user";
 import { useMutation, useQuery } from "react-query";
-import { logOutOutline } from "ionicons/icons";
+import { add, logOutOutline } from "ionicons/icons";
 import { logoutUser } from "../../services/auth";
 import { authStore } from "../../store/auth";
+import { useParams } from "react-router";
 
 const Home: React.FC = () => {
-  const { photoURL } = authStore();
+  const { photoURL, displayName } = authStore();
 
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [summaryText, setSummaryText] = useState<string>("");
@@ -57,6 +58,29 @@ const Home: React.FC = () => {
     }
   };
 
+  const summaries = [];
+
+  const handlSummary = async (summary: any) => {
+    try {
+      const summaryInfo = await addSummary(summary);
+      if (summaryInfo) {
+        summaries.push(summaryInfo);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const summary = {
+      videoUrl: videoUrl,
+      summaryText: summaryText,
+      id: "1",
+    };
+    console.log(summary);
+    handlSummary(summary);
+  }, [summaryText]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -65,9 +89,6 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonItem>
-          <img src={photoURL} alt="user" />
-        </IonItem>
         <IonItem className="ion-padding ion-margin">
           <IonInput
             placeholder="Enter a URL from youtube"
@@ -87,7 +108,7 @@ const Home: React.FC = () => {
         )}
         <IonFab slot="fixed" horizontal="end" vertical="top" edge={true}>
           <IonFabButton>
-            <IonIcon></IonIcon>
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocL2lSL1QA_n-1qd_u5lyWsNNodmxd3Bkx4lSDqQ7S5KuPE=s96-c"></img>
           </IonFabButton>
           <IonFabList side="start">
             <IonFabButton onClick={logout}>
