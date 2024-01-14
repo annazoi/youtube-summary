@@ -3,6 +3,7 @@ const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 const ffmpeg = require("ffmpeg-static");
 const deepgram = require("../utils/deepgram");
 const summary = require("../services/summary");
+const path = require("path");
 
 const getSummary = async (req, res) => {
   const { url } = req.body;
@@ -21,7 +22,7 @@ const getSummary = async (req, res) => {
     console.log(data.progress.percentage + "% downloaded");
   });
 
-  YD.on("finished", async (video) => {
+  YD.on("finished", async (err, video) => {
     try {
       const videoFileName = video.file;
       console.log(`Downloaded ${videoFileName}`);

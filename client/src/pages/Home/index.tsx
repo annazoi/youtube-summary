@@ -34,7 +34,7 @@ const Home: React.FC = () => {
     mutationFn: getSummary,
   });
 
-  const { data, isLoading: isSummaries } = useQuery({
+  const { isLoading: isSummaries } = useQuery({
     queryKey: "getSummaries",
     queryFn: () => getSummaries(uid),
     onSuccess: (data) => {
