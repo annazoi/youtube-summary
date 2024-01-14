@@ -3,7 +3,6 @@ import { devtools, persist } from "zustand/middleware";
 
 interface AuthState {
   isLoggedIn: boolean;
-  // token: string;
   uid: string;
   photoURL: string;
   displayName: string;

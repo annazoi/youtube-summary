@@ -35,8 +35,10 @@
     "react-query": "^3.39.3",
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4",
+    "uid": "^2.0.2",
     "youtube-mp3-downloader": "^0.7.11",
-    "youtube-transcript": "^1.0.6"
+    "youtube-transcript": "^1.0.6",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@capacitor/cli": "5.6.0",

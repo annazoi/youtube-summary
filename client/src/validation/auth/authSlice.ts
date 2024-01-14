@@ -2,7 +2,7 @@ import { User } from "../../types/interfaces";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: User = {
-  id: "",
+  uid: "",
   displayName: "",
   email: "",
   photoURL: "",
@@ -15,7 +15,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.id = action.payload.id;
+      state.uid = action.payload.uid;
       state.displayName = action.payload.displayName;
       state.email = action.payload.email;
       state.photoURL = action.payload.photoURL;
@@ -27,11 +27,11 @@ export const authSlice = createSlice({
       state.displayName = "";
       state.email = "";
       state.photoURL = "";
-      state.id = "";
+      state.uid = "";
       state.userEntered = false;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: () => {},
 });
 
 export const { login, logout } = authSlice.actions;

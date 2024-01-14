@@ -14,28 +14,31 @@ import {
   IonIcon,
   useIonRouter,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
-import { getSummary, addSummary } from "../../services/summary";
-import { addNewUser } from "../../services/user";
+import React, { useState } from "react";
+import { getSummary, addSummary, getSummaries } from "../../services/summary";
 import { useMutation, useQuery } from "react-query";
-import { add, logOutOutline } from "ionicons/icons";
+import { logOutOutline } from "ionicons/icons";
 import { logoutUser } from "../../services/auth";
 import { authStore } from "../../store/auth";
-import { useParams } from "react-router";
 
 const Home: React.FC = () => {
-  const { photoURL, displayName } = authStore();
+  const { photoURL, uid } = authStore();
 
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [summaryText, setSummaryText] = useState<string>("");
+  const [summaries, setSummaries] = useState<any[]>([]);
 
   const router = useIonRouter();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: getSummary,
+  });
+
+  const { data, isLoading: isSummaries } = useQuery({
+    queryKey: "getSummaries",
+    queryFn: () => getSummaries(uid),
     onSuccess: (data) => {
-      console.log(data);
-      setSummaryText(data.summaryText);
+      setSummaries(data);
     },
   });
 
@@ -43,43 +46,34 @@ const Home: React.FC = () => {
     setVideoUrl(e.detail.value!);
   };
 
-  const summary = () => {
-    mutate(videoUrl);
-  };
-
   const logout = async () => {
     try {
       logoutUser();
       router.push("/auth", "forward", "replace");
-      // window.location.reload();
-      console.log("logout");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const summaries = [];
-
-  const handlSummary = async (summary: any) => {
+  const handleSummary = async () => {
     try {
-      const summaryInfo = await addSummary(summary);
-      if (summaryInfo) {
-        summaries.push(summaryInfo);
-      }
+      mutate(videoUrl, {
+        onSuccess: async (data) => {
+          setSummaryText(data.summaryText);
+          await addSummary({
+            videoUrl,
+            summaryText: data.summaryText,
+            userId: uid,
+          });
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+      });
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    const summary = {
-      videoUrl: videoUrl,
-      summaryText: summaryText,
-      id: "1",
-    };
-    console.log(summary);
-    handlSummary(summary);
-  }, [summaryText]);
 
   return (
     <IonPage>
@@ -95,7 +89,7 @@ const Home: React.FC = () => {
             value={videoUrl}
             onIonChange={handleUrl}
           ></IonInput>
-          <IonButton expand="block" slot="end" onClick={summary}>
+          <IonButton expand="block" slot="end" onClick={handleSummary}>
             GET SUMMARY
           </IonButton>
         </IonItem>
@@ -106,9 +100,23 @@ const Home: React.FC = () => {
             <p>{summaryText}</p>
           </IonItem>
         )}
+        <IonLoading isOpen={isSummaries} message={"Loading..."} />
+        {summaries.length > 0 && (
+          <IonItem className="summaries-content">
+            <p style={{ fontSize: "30px", display: "flex" }}>
+              Previous Summaries
+            </p>
+            {summaries.map((summary, index) => (
+              <div key={index}>
+                <p style={{ fontWeight: "600" }}>{summary.videoUrl}</p>
+                <p key={index}>{summary.summaryText}</p>
+              </div>
+            ))}
+          </IonItem>
+        )}
         <IonFab slot="fixed" horizontal="end" vertical="top" edge={true}>
           <IonFabButton>
-            <img src="https://lh3.googleusercontent.com/a/ACg8ocL2lSL1QA_n-1qd_u5lyWsNNodmxd3Bkx4lSDqQ7S5KuPE=s96-c"></img>
+            <img src={photoURL}></img>
           </IonFabButton>
           <IonFabList side="start">
             <IonFabButton onClick={logout}>

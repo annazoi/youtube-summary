@@ -6,7 +6,6 @@ import {
   IonContent,
   IonGrid,
   IonHeader,
-  IonImg,
   IonPage,
   IonRow,
   IonTitle,
@@ -19,10 +18,6 @@ import "./style.css";
 import { authStore } from "../../store/auth";
 import { addNewUser } from "../../services/user";
 
-interface AuthLogin {
-  userLogin: () => void;
-}
-
 const Auth: React.FC = () => {
   const router = useIonRouter();
 
@@ -32,7 +27,6 @@ const Auth: React.FC = () => {
     try {
       signInWithGoogle().then(async (res) => {
         handleLogin(res.user);
-        console.log(res, "res");
       });
     } catch (error) {
       console.log(error);
@@ -42,7 +36,6 @@ const Auth: React.FC = () => {
   const handleLogin = async (user: any) => {
     try {
       const userInfo = await addNewUser(user);
-      console.log(userInfo, "userInfo");
       if (userInfo) {
         logIn(userInfo);
         router.push("/home", "forward", "replace");
@@ -53,17 +46,6 @@ const Auth: React.FC = () => {
     }
   };
 
-  // const handleLogin = async (user: any) => {
-  //   try {
-  //     const loggedUser = await addNewUser(user);
-  //     if (loggedUser) {
-  //       userLogin();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <IonPage>
       <IonHeader>
@@ -71,18 +53,13 @@ const Auth: React.FC = () => {
           <IonTitle>Summary Finder</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent className="ion-text-center ion-padding">
         <IonGrid fixed>
           <IonRow class="ion-justify-content-center">
-            <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4">
-              <div className="ion-text-center ion-padding">
-                {/* <img src={FCC} alt="FCC Logo" width={"50%"} /> */}
-              </div>
-            </IonCol>
+            <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4"></IonCol>
           </IonRow>
           <IonRow class="ion-justify-content-center">
             <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4">
-              {/* <IonImg src={Logo} alt="logo" class="ion-padding"></IonImg> */}
               <IonCard>
                 <IonCardContent>
                   <h1 className="signIn-content">Sign In</h1>

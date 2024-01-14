@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { IonIcon, IonLabel, IonButton } from "@ionic/react";
 import React from "react";
 import { logoGoogle } from "ionicons/icons";

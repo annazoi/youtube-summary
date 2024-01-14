@@ -8,7 +8,6 @@ const summary = async (transcript) => {
     ],
   });
   const result = response.choices[0].message.content;
-  // console.log(result);
   return result;
 };
 

@@ -1,5 +1,5 @@
 import { db } from "../utils/firebase";
-import { setDoc, doc, getDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { User } from "../types/interfaces";
 
 export const addNewUser = async (user: any): Promise<User | null> => {
@@ -14,12 +14,6 @@ export const addNewUser = async (user: any): Promise<User | null> => {
     if (isNewUser(user.metadata.creationTime)) {
       const newUser = await setDoc(doc(db, "users", user.uid), userToStore);
       console.log("Document written with ID: ", newUser);
-    } else {
-      // const docRef = doc(db, "users", user.uid);
-      // const docSnap = await getDoc(docRef);
-      // if (docSnap.exists()) {
-      //   return docSnap.data() as User;
-      // }
     }
     const finalUser = {
       ...userToStore,
