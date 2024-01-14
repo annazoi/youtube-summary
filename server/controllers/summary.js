@@ -6,24 +6,24 @@ const summary = require("../services/summary");
 const path = require("path");
 
 const getSummary = async (req, res) => {
-  const { url } = req.body;
+  try {
+    const { url } = req.body;
 
-  const id = new URL(url).searchParams.get("v");
+    const id = new URL(url).searchParams.get("v");
 
-  const YD = new YoutubeMp3Downloader({
-    ffmpegPath: ffmpeg,
-    outputPath: "./",
-    youtubeVideoQuality: "highestaudio",
-  });
+    const YD = new YoutubeMp3Downloader({
+      ffmpegPath: ffmpeg,
+      outputPath: "./",
+      youtubeVideoQuality: "highestaudio",
+    });
 
-  YD.download(id);
+    YD.download(id);
 
-  YD.on("progress", (data) => {
-    console.log(data.progress.percentage + "% downloaded");
-  });
+    YD.on("progress", (data) => {
+      console.log(data.progress.percentage + "% downloaded");
+    });
 
-  YD.on("finished", async (err, video) => {
-    try {
+    YD.on("finished", async (err, video) => {
       const videoFileName = video.file;
       console.log(`Downloaded ${videoFileName}`);
 
@@ -46,10 +46,10 @@ const getSummary = async (req, res) => {
           return res.status(200).json({ transcript, summaryText });
         })
         .catch((e) => console.log(e));
-    } catch (error) {
-      return res.status(400).json({ message: error.message });
-    }
-  });
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 module.exports = { getSummary };
