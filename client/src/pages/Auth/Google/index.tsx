@@ -8,7 +8,7 @@ interface GoogleLogin {
 
 const Google: React.FC<GoogleLogin> = ({ onClick }) => {
   return (
-    <IonButton size="large" onClick={onClick} expand="block">
+    <IonButton size="large" onClick={onClick} expand="block" color={"primary"}>
       <IonIcon slot="start" icon={logoGoogle} size="large"></IonIcon>
       <IonLabel slot="end">Sign in with Google</IonLabel>
     </IonButton>

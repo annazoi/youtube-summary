@@ -20,6 +20,7 @@ import { useMutation, useQuery } from "react-query";
 import { logOutOutline } from "ionicons/icons";
 import { logoutUser } from "../../services/auth";
 import { authStore } from "../../store/auth";
+import logo from "../../assets/logo.jpg";
 
 const Home: React.FC = () => {
   const { photoURL, uid } = authStore();
@@ -34,14 +35,15 @@ const Home: React.FC = () => {
     mutationFn: getSummary,
   });
 
-  const { isLoading: isSummaries } = useQuery({
+  const { isLoading: isSummaries, data } = useQuery({
     queryKey: "getSummaries",
     queryFn: () => getSummaries(uid),
     onSuccess: (data) => {
+      console.log(data);
       setSummaries(data);
     },
   });
-
+  console.log(summaries);
   const handleUrl = (e: CustomEvent) => {
     setVideoUrl(e.detail.value!);
   };
@@ -79,15 +81,35 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Summary Finder</IonTitle>
+          <IonTitle
+            style={{
+              fontSize: "30px",
+              fontWeight: "bold",
+              color: "black",
+            }}
+          >
+            Summary Finder
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonItem className="ion-padding ion-margin">
+        <IonItem
+          className="ion-no-padding ion-margin"
+          style={{
+            boxShadow: "0px 0px 8px 0px var(--ion-color-primary)",
+            border: "1px solid #0000001a",
+            borderRadius: "15px",
+            marginTop: "40px",
+          }}
+        >
           <IonInput
             placeholder="Enter a URL from youtube"
             value={videoUrl}
             onIonChange={handleUrl}
+            style={{
+              lines: "none",
+              marginLeft: "10px",
+            }}
           ></IonInput>
           <IonButton expand="block" slot="end" onClick={handleSummary}>
             GET SUMMARY
@@ -116,7 +138,11 @@ const Home: React.FC = () => {
         )}
         <IonFab slot="fixed" horizontal="end" vertical="top" edge={true}>
           <IonFabButton>
-            <img src={photoURL}></img>
+            {/* <img src={photoURL}></img> */}
+            <img
+              src="https://www.youtubesummarized.com/logo.svg"
+              style={{ width: "100%", height: "100%" }}
+            />
           </IonFabButton>
           <IonFabList side="start">
             <IonFabButton onClick={logout}>

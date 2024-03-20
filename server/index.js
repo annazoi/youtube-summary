@@ -18,7 +18,7 @@ app.use(
 app.use(cors());
 
 app.use("/api/summary", summaryRoutes);
-app.use("api/download", downloadMp3Routes);
+// app.use("api/download", downloadMp3Routes);
 
 http.listen(3000, () => {
   console.log("App is running");
