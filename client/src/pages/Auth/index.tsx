@@ -77,14 +77,15 @@ const Auth: React.FC = () => {
         <div
           style={{
             display: "flex",
-            flexDirection: "row",
+            // flexDirection: "row",
             gap: "80px",
-            marginLeft: "70px",
+            // marginLeft: "70px",
           }}
         >
           <img
             style={{
               borderRadius: "15px",
+              maxWidth: "900px",
             }}
             src="https://miro.medium.com/v2/resize:fit:1200/1*xOPEyGvaGKRja-k3eDyCMw.png"
             alt=""
