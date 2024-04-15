@@ -74,58 +74,42 @@ const Auth: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-text-center ion-padding">
-        <div
-          style={{
-            display: "flex",
-            // flexDirection: "row",
-            gap: "80px",
-            // marginLeft: "70px",
-          }}
-        >
-          <img
-            style={{
-              borderRadius: "15px",
-              maxWidth: "900px",
-            }}
-            src="https://miro.medium.com/v2/resize:fit:1200/1*xOPEyGvaGKRja-k3eDyCMw.png"
-            alt=""
-          />
-          <div
-            style={{
-              boxShadow: "0px 0px 8px 2px #e04a3f",
-              borderRadius: "15px",
-              padding: "15px",
-              border: "1px solid black",
-              maxWidth: "400px",
-            }}
-          >
-            <IonCardContent>
-              <IonTitle
-                className="ion-no-padding"
-                style={{
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                  color: "black",
-                  marginBottom: "20px",
-                  marginTop: "10px",
-                }}
-              >
-                Sign In
-              </IonTitle>
-              <div className="signIn-content">
-                <Google onClick={googleSign} />
-              </div>
-              <img
-                src={summary}
-                alt=""
-                style={{
-                  marginTop: "80px",
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: "15px",
-                }}
-              />
-            </IonCardContent>
+        <div className="auth-container">
+          <div className="img-auth-container">
+            <img
+              src="https://miro.medium.com/v2/resize:fit:1200/1*xOPEyGvaGKRja-k3eDyCMw.png"
+              alt=""
+              style={{ height: "100%", borderRadius: "15px" }}
+            />
+          </div>
+          <div className="auth-card">
+            {/* <IonCardContent> */}
+            <IonTitle
+              className="ion-no-padding"
+              style={{
+                fontSize: "30px",
+                fontWeight: "bold",
+                color: "black",
+                marginBottom: "20px",
+                marginTop: "10px",
+              }}
+            >
+              Sign In
+            </IonTitle>
+            <div className="signIn-content">
+              <Google onClick={googleSign} />
+            </div>
+            {/* <img
+              src={summary}
+              alt=""
+              style={{
+                marginTop: "80px",
+                width: "100%",
+                height: "100%",
+                borderRadius: "15px",
+              }}
+            /> */}
+            {/* </IonCardContent> */}
           </div>
         </div>
       </IonContent>
