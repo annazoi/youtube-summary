@@ -97,9 +97,9 @@ const Home: React.FC = () => {
           className="ion-no-padding ion-margin"
           style={{
             boxShadow: "0px 0px 8px 0px var(--ion-color-primary)",
-            border: "1px solid #0000001a",
             borderRadius: "15px",
             marginTop: "40px",
+            border: "none",
           }}
         >
           <IonInput
@@ -107,7 +107,6 @@ const Home: React.FC = () => {
             value={videoUrl}
             onIonChange={handleUrl}
             style={{
-              lines: "none",
               marginLeft: "10px",
             }}
           ></IonInput>

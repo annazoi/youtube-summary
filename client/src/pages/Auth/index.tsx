@@ -73,7 +73,7 @@ const Auth: React.FC = () => {
           </IonAvatar>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-text-center ion-padding">
+      <IonContent>
         <div className="auth-container">
           <div className="img-auth-container">
             <img
@@ -83,33 +83,27 @@ const Auth: React.FC = () => {
             />
           </div>
           <div className="auth-card">
-            {/* <IonCardContent> */}
             <IonTitle
               className="ion-no-padding"
               style={{
                 fontSize: "30px",
                 fontWeight: "bold",
                 color: "black",
-                marginBottom: "20px",
-                marginTop: "10px",
+                letterSpacing: "2px",
               }}
             >
               Sign In
             </IonTitle>
-            <div className="signIn-content">
-              <Google onClick={googleSign} />
-            </div>
-            {/* <img
+            <Google onClick={googleSign} />
+            <img
               src={summary}
               alt=""
               style={{
-                marginTop: "80px",
+                // padding: "20px",
                 width: "100%",
-                height: "100%",
-                borderRadius: "15px",
+                height: "400px",
               }}
-            /> */}
-            {/* </IonCardContent> */}
+            />
           </div>
         </div>
       </IonContent>
