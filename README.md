@@ -2,7 +2,7 @@
 
 ### 1. Clone the repository:
 
-https://github.com/annazoi/chat-ionic.git
+https://github.com/annazoi/youtube-summary.git
 
 ### 2. Navigate to the project directory
 
