@@ -46,7 +46,7 @@ https://github.com/annazoi/youtube-summary.git
 
 ### 2. Navigate to the project directory
 
-### Set up Firebase:
+### 3. Set up Firebase:
 
 - Create a Firebase project.
 
@@ -56,7 +56,7 @@ https://github.com/annazoi/youtube-summary.git
 
 - Update the Firebase configuration in the project.
 
-### 3. Install dependencies:
+### 4. Install dependencies:
 
 ### CLIENT
 
