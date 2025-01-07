@@ -1,10 +1,60 @@
-## Installation
+## YouTube Transcript Summarizer
 
-### 1. Clone the repository:
+### This repository contains a web application that leverages AI to generate concise summaries of YouTube video transcripts. Users can log in using their Google accounts and input a YouTube video URL to receive an AI-generated summary of the video's content.
+
+### Features
+
+- AI-Powered Summaries: Automatically generates a summary of the transcript for any given YouTube video.
+
+- Google Authentication: Users can log in securely using their Google accounts.
+
+- User-Friendly Input: Simply provide a YouTube video URL to get a summary.
+
+- Seamless Experience: Built with modern web technologies for fast and responsive performance.
+
+### Technologies Used
+
+- Frontend: React, TypeScript, Ionic
+
+- Backend: Express
+
+- Cloud Services: Firebase (Authentication, Database, Hosting)
+
+### How It Works
+
+The user logs in via Google authentication.
+
+After successful login, the user provides a YouTube video URL.
+
+The backend processes the video transcript and uses AI to generate a summary.
+
+The summary is displayed to the user in a clean and intuitive interface.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or later)
+
+- npm or yarn
+
+- Firebase account for authentication and database setup
+
+### 1. Clone this repository:
 
 https://github.com/annazoi/youtube-summary.git
 
 ### 2. Navigate to the project directory
+
+### Set up Firebase:
+
+- Create a Firebase project.
+
+- Enable Google authentication.
+
+- Set up Firestore or Realtime Database as needed.
+
+- Update the Firebase configuration in the project.
 
 ### 3. Install dependencies:
 
