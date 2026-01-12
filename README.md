@@ -1,6 +1,6 @@
 ## YouTube Transcript Summarizer
 
-### This repository contains a web application that leverages AI to generate concise summaries of YouTube video transcripts. Users can log in using their Google accounts and input a YouTube video URL to receive an AI-generated summary of the video's content.
+### A web application that leverages AI to generate concise summaries of YouTube video transcripts. Users can log in using their Google accounts and input a YouTube video URL to receive an AI-generated summary of the video's content.
 
 ### Features
 
